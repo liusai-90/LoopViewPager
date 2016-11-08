@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="LoopViewPager">
+        <!-- 轮播间隔时间 -->
+        <attr name="intervalTime" format="integer|reference" />
+        <!-- 圆点宽度 -->
+        <attr name="dotWidth" format="integer|dimension|reference" />
+        <!-- 圆点高度 -->
+        <attr name="dotHeight" format="integer|dimension|reference" />
+        <!-- 圆点距离 -->
+        <attr name="dotRange" format="integer|dimension|reference" />
+        <!-- 圆点颜色 -->
+        <attr name="dotColor" format="color|reference" />
+        <!-- 圆点选中颜色 -->
+        <attr name="dotSelectColor" format="color|reference" />
+        <!-- 圆点资源 -->
+        <attr name="dotResource" format="reference" />
+        <!-- 圆点选中资源 -->
+        <attr name="dotSelectResource" format="reference" />
+    </declare-styleable>
+
+</resources>
