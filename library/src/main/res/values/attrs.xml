@@ -4,6 +4,10 @@
     <declare-styleable name="LoopViewPager">
         <!-- 轮播间隔时间 -->
         <attr name="intervalTime" format="integer|reference" />
+        <!-- 是否可以手动滚动 -->
+        <attr name="scrollEnable" format="boolean" />
+        <!-- 触摸是否停止 -->
+        <attr name="touchEnable" format="boolean" />
         <!-- 圆点形状 -->
         <attr name="dotShape">
             <enum name="rectangle" value="1" />
