@@ -23,7 +23,10 @@ public class LoopViewPager<A, B> extends FrameLayout implements View.OnTouchList
     private final int MIN_TIME = 500;
     private int intervalTime;//轮播时间，默认3秒
 
-    private ViewPager viewPager;//轮播页面
+    private boolean scrollEnable;//是否可以手动滚动
+    private boolean touchEnable;//触摸是否停止
+
+    private CustomViewPager viewPager;//轮播页面
     private List<LoopDotsView> loopDotsViews = new ArrayList<>();//轮播圆点
     private List<LoopTitleView> loopTitleViews = new ArrayList<>();//轮播文本
 
@@ -51,22 +54,25 @@ public class LoopViewPager<A, B> extends FrameLayout implements View.OnTouchList
         super(context, attrs);
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.LoopViewPager);
         intervalTime = typedArray.getInt(R.styleable.LoopViewPager_intervalTime, 0);
+        scrollEnable = typedArray.getBoolean(R.styleable.LoopViewPager_scrollEnable, true);
+        touchEnable = typedArray.getBoolean(R.styleable.LoopViewPager_touchEnable, true);
         if (intervalTime < MIN_TIME && intervalTime > 0) {
             intervalTime = MIN_TIME;
         }
         typedArray.recycle();
         View.inflate(getContext(), R.layout.weight_loopviewpager, this);
-        viewPager = (ViewPager) findViewById(R.id.vp_pager);
+        viewPager = (CustomViewPager) findViewById(R.id.cvp_pager);
+        viewPager.setScrollEnable(scrollEnable);
     }
 
     public void setImgData(A imgData) {
         this.imgData = imgData;
-        if (imgData instanceof List){
+        if (imgData instanceof List) {
             length = ((List) imgData).size();
-        }else{
-            if (imgData instanceof String[]){
+        } else {
+            if (imgData instanceof String[]) {
                 length = ((String[]) imgData).length;
-            }else{
+            } else {
                 length = ((int[]) imgData).length;
             }
         }
@@ -129,7 +135,11 @@ public class LoopViewPager<A, B> extends FrameLayout implements View.OnTouchList
             if (imgData instanceof List) {
                 Glide.with(getContext()).load(((List) imgData).get(index)).centerCrop().into(view);
             } else {
-                Glide.with(getContext()).load(((Object[]) imgData)[index]).centerCrop().into(view);
+                if (imgData instanceof String[]) {
+                    Glide.with(getContext()).load(((String[]) imgData)[index]).centerCrop().into(view);
+                } else {
+                    Glide.with(getContext()).load(((int[]) imgData)[index]).centerCrop().into(view);
+                }
             }
             container.addView(view);
             return view;
@@ -183,7 +193,7 @@ public class LoopViewPager<A, B> extends FrameLayout implements View.OnTouchList
      */
     @Override
     public boolean onTouch(View view, MotionEvent motionEvent) {
-        if (intervalTime >= MIN_TIME) {
+        if (intervalTime >= MIN_TIME && touchEnable) {
             switch (motionEvent.getAction()) {
                 case MotionEvent.ACTION_DOWN:
                     handler.removeCallbacksAndMessages(null);
@@ -194,6 +204,15 @@ public class LoopViewPager<A, B> extends FrameLayout implements View.OnTouchList
             }
         }
         return false;
+    }
+
+    @Override
+    public boolean onInterceptTouchEvent(MotionEvent ev) {
+        if (scrollEnable) {
+            return super.onInterceptTouchEvent(ev);
+        } else {
+            return true;
+        }
     }
 
 }
