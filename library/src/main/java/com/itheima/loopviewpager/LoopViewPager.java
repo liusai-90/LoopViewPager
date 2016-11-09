@@ -20,8 +20,8 @@ import java.util.List;
 
 public class LoopViewPager<A, B> extends FrameLayout implements View.OnTouchListener {
 
+    private final int MIN_TIME = 500;
     private int intervalTime;//轮播时间，默认3秒
-
 
     private ViewPager viewPager;//轮播页面
     private List<LoopDotsView> loopDotsViews = new ArrayList<>();//轮播圆点
@@ -51,6 +51,9 @@ public class LoopViewPager<A, B> extends FrameLayout implements View.OnTouchList
         super(context, attrs);
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.LoopViewPager);
         intervalTime = typedArray.getInt(R.styleable.LoopViewPager_intervalTime, 0);
+        if (intervalTime < MIN_TIME && intervalTime > 0) {
+            intervalTime = MIN_TIME;
+        }
         typedArray.recycle();
         View.inflate(getContext(), R.layout.weight_loopviewpager, this);
         viewPager = (ViewPager) findViewById(R.id.vp_pager);
@@ -58,7 +61,15 @@ public class LoopViewPager<A, B> extends FrameLayout implements View.OnTouchList
 
     public void setImgData(A imgData) {
         this.imgData = imgData;
-        length = (imgData instanceof List ? ((List) imgData).size() : ((int[]) imgData).length);
+        if (imgData instanceof List){
+            length = ((List) imgData).size();
+        }else{
+            if (imgData instanceof String[]){
+                length = ((String[]) imgData).length;
+            }else{
+                length = ((int[]) imgData).length;
+            }
+        }
         init();
     }
 
@@ -84,7 +95,6 @@ public class LoopViewPager<A, B> extends FrameLayout implements View.OnTouchList
         for (LoopDotsView loopDotsView : loopDotsViews) {
             loopDotsView.initDots(length);
         }
-
         vpIndex = Integer.MAX_VALUE / 2 - Integer.MAX_VALUE / 2 % length;
         dotIndex = -1;
         viewPager.setAdapter(new LoopPagerAdapter());
@@ -97,6 +107,9 @@ public class LoopViewPager<A, B> extends FrameLayout implements View.OnTouchList
     }
 
 
+    /**
+     * 创建适配器
+     */
     private class LoopPagerAdapter extends PagerAdapter {
 
         @Override
@@ -113,7 +126,11 @@ public class LoopViewPager<A, B> extends FrameLayout implements View.OnTouchList
         public Object instantiateItem(ViewGroup container, int position) {
             int index = position % length;
             ImageView view = new ImageView(getContext());
-            Glide.with(getContext()).load(imgData instanceof List ? ((List<String>) imgData).get(index) : ((int[]) imgData)[index]).centerCrop().into(view);
+            if (imgData instanceof List) {
+                Glide.with(getContext()).load(((List) imgData).get(index)).centerCrop().into(view);
+            } else {
+                Glide.with(getContext()).load(((Object[]) imgData)[index]).centerCrop().into(view);
+            }
             container.addView(view);
             return view;
         }
@@ -125,6 +142,9 @@ public class LoopViewPager<A, B> extends FrameLayout implements View.OnTouchList
 
     }
 
+    /**
+     * 同步显示圆点与标题
+     */
     private class LoopPageChangeListener implements ViewPager.OnPageChangeListener {
         @Override
         public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -134,9 +154,13 @@ public class LoopViewPager<A, B> extends FrameLayout implements View.OnTouchList
         @Override
         public void onPageSelected(int position) {
             int index = position % length;
-            if (titleData != null && loopTitleViews.size() > 0) {
+            if (loopTitleViews.size() > 0) {
                 for (LoopTitleView loopTitleView : loopTitleViews) {
-                    loopTitleView.setText((titleData instanceof List ? ((List<String>) titleData).get(index) : ((String[]) titleData)[index]));
+                    if (titleData instanceof List) {
+                        loopTitleView.setText(((List<String>) titleData).get(index));
+                    } else {
+                        loopTitleView.setText(((String[]) titleData)[index]);
+                    }
                 }
             }
             if (loopDotsViews.size() > 0) {
@@ -154,9 +178,12 @@ public class LoopViewPager<A, B> extends FrameLayout implements View.OnTouchList
         }
     }
 
+    /**
+     * 触摸停止播放
+     */
     @Override
     public boolean onTouch(View view, MotionEvent motionEvent) {
-        if (intervalTime > 0) {
+        if (intervalTime >= MIN_TIME) {
             switch (motionEvent.getAction()) {
                 case MotionEvent.ACTION_DOWN:
                     handler.removeCallbacksAndMessages(null);

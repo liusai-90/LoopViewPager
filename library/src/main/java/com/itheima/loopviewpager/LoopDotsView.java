@@ -10,7 +10,6 @@ public class LoopDotsView extends LinearLayout {
 
     private final int RECTANGLE = 1;
     private final int OVAL = 2;
-    private final int STAR = 3;
     private int dotShape;//圆点形状
     private int dotWidth;//圆点宽度，默认0dp
     private int dotHeight;//圆点高度，默认0dp
@@ -52,8 +51,6 @@ public class LoopDotsView extends LinearLayout {
                 view = new View(getContext());
             }else if (dotShape == OVAL){
                 view = new DotOvalView(getContext());
-            }else if (dotShape == STAR){
-                view = new DotStarView(getContext());
             }
             if (i == 0) {
                 params.setMargins(0, 0, 0, 0);
