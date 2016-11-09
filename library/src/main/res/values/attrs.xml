@@ -4,11 +4,10 @@
     <declare-styleable name="LoopViewPager">
         <!-- 轮播间隔时间 -->
         <attr name="intervalTime" format="integer|reference" />
-        <!-- 轮播间隔时间 -->
+        <!-- 圆点形状 -->
         <attr name="dotShape">
             <enum name="rectangle" value="1" />
             <enum name="oval" value="2"/>
-            <enum name="star" value="3"/>
         </attr>
         <!-- 圆点宽度 -->
         <attr name="dotWidth" format="integer|dimension|reference" />
