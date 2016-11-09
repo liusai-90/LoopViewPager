@@ -16,22 +16,12 @@
             android:layout_height="wrap_content"
             android:layout_gravity="top|center_horizontal"
             android:layout_margin="10dp"
-            app:dotHeight="10dp"
+            app:dotShape="oval"
+            app:dotHeight="20dp"
             app:dotRange="10dp"
             app:dotColor="#55000000"
             app:dotSelectColor="#FFFFFF"
-            app:dotWidth="10dp" />
-
-        <com.itheima.loopviewpager.LoopDotsView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|center_horizontal"
-            android:layout_margin="10dp"
-            app:dotHeight="10dp"
-            app:dotRange="10dp"
-            app:dotResource="@drawable/dot_n"
-            app:dotSelectResource="@drawable/dot_p"
-            app:dotWidth="10dp" />
+            app:dotWidth="20dp" />
 
         <com.itheima.loopviewpager.LoopDotsView
             android:layout_width="wrap_content"
