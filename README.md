@@ -3,20 +3,20 @@ Android LoopViewPager 轮播图控件
 
 #权限
 ```xml
-<uses-permission android:name="android.permission.INTERNET"/>
+<uses-permission android:name="android.permission.INTERNET" />
+<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 ```
 #添加依赖
 ```java
 allprojects {
-		repositories {
-			...
-			maven { url "https://jitpack.io" }
-		}
+    repositories {
+        ...
+        maven { url "https://jitpack.io" }
+    }
 }
 
 dependencies {
-	  compile 'com.github.itcastsh:loopviewpager:1.0.0'
-	  compile 'com.github.bumptech.glide:glide:3.7.0'
+    compile 'com.github.itcastsh:loopviewpager:1.1.0'
 }
 ```
 #代码示例
