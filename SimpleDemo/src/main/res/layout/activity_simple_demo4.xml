@@ -11,6 +11,21 @@
         android:layout_height="200dp"
         app:intervalTime="3000"
         app:scrollEnable="false"
-        app:touchEnable="false" />
+        app:touchEnable="false">
+
+        <com.itheima.loopviewpager.LoopDotsView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right|center_vertical"
+            android:layout_margin="10dp"
+            android:orientation="vertical"
+            app:dotColor="#55000000"
+            app:dotHeight="15dp"
+            app:dotRange="10dp"
+            app:dotSelectColor="#FFFFFF"
+            app:dotShape="oval"
+            app:dotWidth="15dp" />
+
+    </com.itheima.loopviewpager.LoopViewPager>
 
 </LinearLayout>

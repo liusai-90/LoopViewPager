@@ -16,12 +16,12 @@
             android:layout_height="wrap_content"
             android:layout_gravity="top|center_horizontal"
             android:layout_margin="10dp"
-            app:dotShape="oval"
-            app:dotHeight="20dp"
+            app:dotShape="rectangle"
+            app:dotHeight="10dp"
             app:dotRange="10dp"
             app:dotColor="#55000000"
             app:dotSelectColor="#FFFFFF"
-            app:dotWidth="20dp" />
+            app:dotWidth="10dp" />
 
         <com.itheima.loopviewpager.LoopDotsView
             android:layout_width="wrap_content"
