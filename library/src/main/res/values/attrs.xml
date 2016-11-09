@@ -8,6 +8,9 @@
         <attr name="scrollEnable" format="boolean" />
         <!-- 触摸是否停止 -->
         <attr name="touchEnable" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="LoopDotsView">
         <!-- 圆点形状 -->
         <attr name="dotShape">
             <enum name="rectangle" value="1" />
