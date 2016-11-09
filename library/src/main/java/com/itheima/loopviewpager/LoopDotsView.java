@@ -21,15 +21,15 @@ public class LoopDotsView extends LinearLayout {
 
     public LoopDotsView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.LoopViewPager);
-        dotShape = typedArray.getInt(R.styleable.LoopViewPager_dotShape, RECTANGLE);
-        dotWidth = (int) typedArray.getDimension(R.styleable.LoopViewPager_dotWidth, 0);
-        dotHeight = (int) typedArray.getDimension(R.styleable.LoopViewPager_dotHeight, 0);
-        dotRange = (int) typedArray.getDimension(R.styleable.LoopViewPager_dotRange, 0);
-        dotColor = typedArray.getColor(R.styleable.LoopViewPager_dotColor, 0);
-        dotSelectColor = typedArray.getColor(R.styleable.LoopViewPager_dotSelectColor, 0);
-        dotResource = typedArray.getResourceId(R.styleable.LoopViewPager_dotResource, 0);
-        dotSelectResource = typedArray.getResourceId(R.styleable.LoopViewPager_dotSelectResource, 0);
+        TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.LoopDotsView);
+        dotShape = typedArray.getInt(R.styleable.LoopDotsView_dotShape, RECTANGLE);
+        dotWidth = (int) typedArray.getDimension(R.styleable.LoopDotsView_dotWidth, 0);
+        dotHeight = (int) typedArray.getDimension(R.styleable.LoopDotsView_dotHeight, 0);
+        dotRange = (int) typedArray.getDimension(R.styleable.LoopDotsView_dotRange, 0);
+        dotColor = typedArray.getColor(R.styleable.LoopDotsView_dotColor, 0);
+        dotSelectColor = typedArray.getColor(R.styleable.LoopDotsView_dotSelectColor, 0);
+        dotResource = typedArray.getResourceId(R.styleable.LoopDotsView_dotResource, 0);
+        dotSelectResource = typedArray.getResourceId(R.styleable.LoopDotsView_dotSelectResource, 0);
         typedArray.recycle();
     }
 
@@ -47,9 +47,9 @@ public class LoopDotsView extends LinearLayout {
         }
         for (int i = 0; i < length; i++) {
             View view = null;
-            if (dotShape == RECTANGLE){
+            if (dotShape == RECTANGLE) {
                 view = new View(getContext());
-            }else if (dotShape == OVAL){
+            } else if (dotShape == OVAL) {
                 view = new DotOvalView(getContext());
             }
             if (i == 0) {
@@ -60,7 +60,11 @@ public class LoopDotsView extends LinearLayout {
                     view.setBackgroundColor(dotSelectColor);
                 }
             } else {
-                params.setMargins(dotRange, 0, 0, 0);
+                if (getOrientation() == VERTICAL) {
+                    params.setMargins(0, dotRange, 0, 0);
+                } else {
+                    params.setMargins(dotRange, 0, 0, 0);
+                }
                 if (dotResource != 0) {
                     view.setBackgroundResource(dotResource);
                 } else {
@@ -73,7 +77,7 @@ public class LoopDotsView extends LinearLayout {
     }
 
     public void update(int index, int dotIndex) {
-        if (index >= 0){
+        if (index >= 0) {
             if (dotSelectResource != 0) {
                 getChildAt(index).setBackgroundResource(dotSelectResource);
             } else {
