@@ -62,7 +62,6 @@ public class LoopViewPager<A, B> extends FrameLayout implements View.OnTouchList
         typedArray.recycle();
         View.inflate(getContext(), R.layout.weight_loopviewpager, this);
         viewPager = (CustomViewPager) findViewById(R.id.cvp_pager);
-        viewPager.setScrollEnable(scrollEnable);
     }
 
     public void setImgData(A imgData) {
