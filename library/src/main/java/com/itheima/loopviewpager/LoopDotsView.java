@@ -57,7 +57,11 @@ public class LoopDotsView extends LinearLayout {
                 if (dotSelectResource != 0) {
                     view.setBackgroundResource(dotSelectResource);
                 } else {
-                    view.setBackgroundColor(dotSelectColor);
+                    if (dotShape == RECTANGLE){
+                        view.setBackgroundColor(dotSelectColor);
+                    }else{
+                        ((DotOvalView)view).change(dotSelectColor);
+                    }
                 }
             } else {
                 if (getOrientation() == VERTICAL) {
@@ -68,7 +72,12 @@ public class LoopDotsView extends LinearLayout {
                 if (dotResource != 0) {
                     view.setBackgroundResource(dotResource);
                 } else {
-                    view.setBackgroundColor(dotColor);
+                    if (dotShape == RECTANGLE){
+                        view.setBackgroundColor(dotColor);
+                    }else{
+                        ((DotOvalView)view).change(dotColor);
+                    }
+
                 }
             }
             view.setLayoutParams(params);
@@ -81,14 +90,22 @@ public class LoopDotsView extends LinearLayout {
             if (dotSelectResource != 0) {
                 getChildAt(index).setBackgroundResource(dotSelectResource);
             } else {
-                getChildAt(index).setBackgroundColor(dotSelectColor);
+                if (dotShape == RECTANGLE){
+                    getChildAt(index).setBackgroundColor(dotSelectColor);
+                }else{
+                    ((DotOvalView)getChildAt(index)).change(dotSelectColor);
+                }
             }
         }
         if (dotIndex >= 0) {
             if (dotResource != 0) {
                 getChildAt(dotIndex).setBackgroundResource(dotResource);
             } else {
-                getChildAt(dotIndex).setBackgroundColor(dotColor);
+                if (dotShape == RECTANGLE){
+                    getChildAt(dotIndex).setBackgroundColor(dotColor);
+                }else{
+                    ((DotOvalView)getChildAt(dotIndex)).change(dotColor);
+                }
             }
         }
     }
