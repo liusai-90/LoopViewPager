@@ -20,11 +20,11 @@
             android:layout_margin="10dp"
             android:orientation="vertical"
             app:dotColor="#55000000"
-            app:dotHeight="15dp"
+            app:dotHeight="20dp"
             app:dotRange="10dp"
             app:dotSelectColor="#FFFFFF"
             app:dotShape="oval"
-            app:dotWidth="15dp" />
+            app:dotWidth="20dp" />
 
     </com.itheima.loopviewpager.LoopViewPager>
 
