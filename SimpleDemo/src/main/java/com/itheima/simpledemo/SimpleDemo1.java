@@ -13,7 +13,7 @@ public class SimpleDemo1 extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_simple_demo1);
-        imageData = new int[]{R.mipmap.image1, R.mipmap.image2, R.mipmap.image3, R.mipmap.image4, R.mipmap.image5, R.mipmap.image6};
+        imageData = new int[]{R.mipmap.image1, R.mipmap.image2, R.mipmap.image3, R.mipmap.image4, R.mipmap.image5};
         ((LoopViewPager) findViewById(R.id.lvp_pager)).setImgData(imageData);
     }
 
