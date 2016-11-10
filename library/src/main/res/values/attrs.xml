@@ -3,18 +3,36 @@
 
     <declare-styleable name="LoopViewPager">
         <!-- 轮播间隔时间 -->
-        <attr name="intervalTime" format="integer|reference" />
+        <attr name="intervalTime" format="integer" />
         <!-- 是否可以手动滚动 -->
         <attr name="scrollEnable" format="boolean" />
         <!-- 触摸是否停止 -->
         <attr name="touchEnable" format="boolean" />
+        <!-- 动画时间 -->
+        <attr name="animTime" format="integer" />
+        <attr name="animStyle" format="enum">
+            <enum name="Accordion" value="1" />
+            <enum name="Background2Foreground" value="2" />
+            <enum name="CubeIn" value="3" />
+            <enum name="DepthPage" value="4" />
+            <enum name="Fade" value="5" />
+            <enum name="FlipHorizontal" value="6" />
+            <enum name="FlipPage" value="7" />
+            <enum name="Foreground2Background" value="8" />
+            <enum name="RotateDown" value="9" />
+            <enum name="RotateUp" value="10" />
+            <enum name="Stack" value="11" />
+            <enum name="Tablet" value="12" />
+            <enum name="ZoomIn" value="13" />
+            <enum name="ZoomOutSlide" value="14" />
+            <enum name="ZoomOut" value="15" />
+        </attr>
     </declare-styleable>
-
     <declare-styleable name="LoopDotsView">
         <!-- 圆点形状 -->
         <attr name="dotShape">
             <enum name="rectangle" value="1" />
-            <enum name="oval" value="2"/>
+            <enum name="oval" value="2" />
         </attr>
         <!-- 圆点宽度 -->
         <attr name="dotWidth" format="integer|dimension|reference" />
