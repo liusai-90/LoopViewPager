@@ -10,6 +10,8 @@
         android:layout_width="match_parent"
         android:layout_height="200dp"
         app:intervalTime="3000"
+        app:animTime="1000"
+        app:animStyle="Accordion"
         app:scrollEnable="false"
         app:touchEnable="false">
 
