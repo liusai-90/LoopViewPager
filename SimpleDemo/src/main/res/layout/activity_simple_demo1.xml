@@ -9,6 +9,7 @@
         android:id="@+id/lvp_pager"
         android:layout_width="match_parent"
         android:layout_height="200dp"
-        app:intervalTime="2000" />
+        app:intervalTime="2000"
+        app:animStyle="Accordion"/>
 
 </LinearLayout>

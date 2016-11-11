@@ -13,7 +13,7 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Class[] classes = {SimpleDemo1.class, SimpleDemo2.class, SimpleDemo3.class, SimpleDemo4.class};
+    private Class[] classes = {SimpleDemo1.class, SimpleDemo2.class, SimpleDemo3.class, SimpleDemo4.class, SimpleDemo5.class};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

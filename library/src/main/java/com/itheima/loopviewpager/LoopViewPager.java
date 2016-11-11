@@ -12,9 +12,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.itheima.loopviewpager.transformer.AccordionTransformer;
 import com.itheima.loopviewpager.transformer.BaseTransformer;
 
 import java.util.ArrayList;
@@ -86,9 +86,9 @@ public class LoopViewPager<A, B> extends FrameLayout implements View.OnTouchList
         if (animStyle > 0) {
             BaseTransformer t = null;
             switch (animStyle) {
-                case Accordion:
-                    t = new AccordionTransformer();
-                    break;
+//                case Accordion:
+//                    t = new AccordionTransformer();
+//                    break;
 //                case Background2Foreground:
 //                    t = new BackgroundToForegroundTransformer();
 //                    break;
@@ -131,9 +131,17 @@ public class LoopViewPager<A, B> extends FrameLayout implements View.OnTouchList
 //                case ZoomOut:
 //                    t = new ZoomOutTransformer();
 //                    break;
+                default:
+                    Toast.makeText(getContext(), "动画效果未实现", Toast.LENGTH_SHORT).show();
+                    break;
             }
-            viewPager.setPageTransformer(true, t);
+            if (t != null)
+                viewPager.setPageTransformer(true, t);
         }
+    }
+
+    public void setPageTransformer(ViewPager.PageTransformer t){
+        viewPager.setPageTransformer(true, t);
     }
 
     public void setImgData(A imgData) {
@@ -166,19 +174,18 @@ public class LoopViewPager<A, B> extends FrameLayout implements View.OnTouchList
             if (view instanceof LoopTitleView) {
                 loopTitleViews.add((LoopTitleView) view);
             } else if (view instanceof LoopDotsView) {
-                loopDotsViews.add((LoopDotsView) view);
+                LoopDotsView loopDotsView = (LoopDotsView) view;
+                loopDotsView.initDots(length);
+                loopDotsViews.add(loopDotsView);
             }
         }
-        for (LoopDotsView loopDotsView : loopDotsViews) {
-            loopDotsView.initDots(length);
-        }
-        vpIndex = Integer.MAX_VALUE / 2 - Integer.MAX_VALUE / 2 % length;
+        vpIndex = 1000 * (Integer.MAX_VALUE % length);
         dotIndex = -1;
         viewPager.setAdapter(new LoopPagerAdapter());
         viewPager.addOnPageChangeListener(new LoopPageChangeListener());
         viewPager.setOnTouchListener(this);
         viewPager.setCurrentItem(vpIndex);
-        if (intervalTime > 0) {
+        if (intervalTime >= MIN_TIME) {
             handler.sendEmptyMessageDelayed(SCROLL, intervalTime);
         }
     }
@@ -235,7 +242,7 @@ public class LoopViewPager<A, B> extends FrameLayout implements View.OnTouchList
         @Override
         public void onPageSelected(int position) {
             int index = position % length;
-            if (loopTitleViews.size() > 0) {
+            if (loopTitleViews.size() > 0 && titleData != null) {
                 for (LoopTitleView loopTitleView : loopTitleViews) {
                     if (titleData instanceof List) {
                         loopTitleView.setText(((List<String>) titleData).get(index));
